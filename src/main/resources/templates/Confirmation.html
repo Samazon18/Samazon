@@ -5,6 +5,34 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container">
 
+    <div class="starter-template">
+        <h5>Order Confirmation</h5>
+    </div>
+    <br /><br />
+    <table class="table table-striped">
+        <tr>
+            <th>Image</th>
+            <th>Product:</th>
+            <th>Price</th>
+            <th>Description</th>
+
+            <!--<th></th>-->
+        </tr>
+        <tr th:each="product : ${products}">
+            <td><img th:src='${product.image}' width="150" height="150"/></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+        </tr>
+    </table>
+
+    <div th:switch="${total}">
+        <p th:case = "&ge; 50" th:inline="text"> Total: [[${total}]]</p>
+        <p th:case = "&lt; 50" th:inline="text"> Total: [[${total}]] + $5 for Shipping</p>
+    </div>
+
+</div><!-- /.container -->
 </body>
 </html>

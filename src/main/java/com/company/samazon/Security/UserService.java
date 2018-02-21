@@ -87,6 +87,20 @@ public class UserService {
         cart.setProducts(Arrays.asList(productRepository.findbyName(product.getName())));
     }
 
+    public void removeItem(Product product, Cart cart){
+        Collection<Product> products = cart.getProducts();
+        products.remove(product);
+        cart.setProducts(products);
+    }
+
+    public float getTotal(Cart cart){
+        float total = 0;
+        for(Product product : cart.getProducts()){
+            total = total + (product.getPrice());
+        }
+        return total;
+    }
+
     public Cart getActiveCart(AppUser appUser){
         Collection<Cart> carts = appUser.getCarts();
         Cart thisCart = new Cart();
@@ -105,13 +119,13 @@ public class UserService {
             }
         }
         return carts;
-     }
+    }
 
-     public void CheckoutCart(Cart cart){
+    public void CheckoutCart(Cart cart){
         for (Product product : cart.getProducts()){
             updateQuantity(product);
         }
-     }
+    }
 
 
 }
